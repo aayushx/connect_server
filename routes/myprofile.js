@@ -54,8 +54,8 @@ router.post("/updateprofile", (req, res) => {
     const dept = req.body.dept
     const course = req.body.course
     const year = req.body.year
-    const userid = reg.body.userid
-    var sql = 'UPDATE users SET (name,email,phone,regno,course,dept,year,batch,) = ("' + name + '","' + email + '","' + phone + '","' + reg + '","' + course + '","' + dept + '","' + year + '","' + batch + '") WHERE userid = ("'+userid+'")';
+    const userid = req.body.userid
+    var sql = 'UPDATE users SET name  = ("' + name + '"), email =("' + email + '"), phone = ("' + phone + '"), regno = ("' + reg + '"), course = ("' + course + '"), dept = ("' + dept + '"), year = ("' + year + '"), batch = ("' + batch + '") WHERE userid = ("'+userid+'")';
     // console.log(username,password,age);
           con.query(sql, (err, result) => {
                 if (err) {

@@ -162,9 +162,9 @@ var time = req.body.time
 var upvotes = 0
 var downvotes = 0
 var answerid = Date.now()
+var username = req.body.username
 
-
-    var sql= 'insert into answers (questionid , answers , userid, date, time, upvotes, downvotes,answerid) values ("'+questionid+'","'+answers+'","'+userid+'","'+date+'","'+time+'","'+upvotes+'","'+downvotes+'","'+answerid  +'")';
+    var sql= 'insert into answers (questionid , answers , userid, date, time, upvotes, downvotes,answerid, username) values ("'+questionid+'","'+answers+'","'+userid+'","'+date+'","'+time+'","'+upvotes+'","'+downvotes+'","'+answerid +'","'+username+'")';
 
     con.query(sql,(err,result)=>{
       
@@ -293,7 +293,6 @@ router.post("/doupvote",(req,res)=>{
     var answerid = req.body.answerid
     var sql = 'select * from upvotes where (userid) = ("'+userid+'") and (answerid) = ("'+answerid+'")';
     con.query(sql,(err,result)=>{
-        
 if(result.length!=0){
     
     res.json({
@@ -366,7 +365,7 @@ router.post("/delupvote",(req,res)=>{
     
     var userid = req.body.userid
     var answerid = req.body.answerid
-    var sql1 = 'delete from upvotes where (userid) = ("'+userid+'") and (answerid)=("'+answerid+'")'
+    var sql1 = 'delete from upvotes where (userid) = ("'+userid+'") and (answerid)=("'+answerid+'")';
     var sql2 = 'update answers set upvotes=upvotes-1 where answerid = ("'+answerid+'")';
     con.query(sql1,(err1,result1)=>{
         if(err1){
@@ -472,10 +471,11 @@ router.post("/deldownvote",(req,res)=>{
     
     var userid = req.body.userid
     var answerid = req.body.answerid
-    var sql = 'delete from downvotes where (userid) = ("'+userid+'") and (answerid)=("'+answerid+'");update answers set downvotes=downvotes-1 where answerid like ("'+amswerid+'")';
-    con.query(sql,(err,result)=>{
-        if(err){
-            console.log(err);
+    var sql1 = 'delete from downvotes where (userid) = ("'+userid+'") and (answerid)=("'+answerid+'")';
+    var sql2 = 'update answers set downvotes=downvotes-1 where answerid = ("'+answerid+'")';
+    con.query(sql1,(err1,result1)=>{
+        if(err1){
+            console.log(err1);
             res.json({
                 success:false,
                 status:400
@@ -488,6 +488,15 @@ router.post("/deldownvote",(req,res)=>{
             })
         }
             })
+            con.query(sql2,(err2,result2)=>{
+                if(err2){
+                    console.log(err2);
+                   
+                }
+                else{
+                 
+                }
+                    })
            
 })
 

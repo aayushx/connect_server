@@ -22,7 +22,11 @@
     "method-override": "^3.0.0",
     "morgan": "^1.9.1",
     "mysql": "^2.17.1",
+<<<<<<< HEAD
     "nodemon": "^2.0.4"
+=======
+    "nodemon": "^2.0.3"
+>>>>>>> 0e28bf074f604058bd0f6bbed878eaa2e2cc5fc6
   },
   "description": ""
 }
